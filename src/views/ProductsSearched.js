@@ -137,7 +137,7 @@ class ProductsSearched extends Component {
         if (this.state.redirect) {
             //retorna a classe Redirect, 
             //e redireciona para o valor do estado redirect 
-            return <Redirect to={this.state.redirect} />
+            return <Redirect to={this.state.redirect} from={this.props.match.url} />
         }
 
         return (

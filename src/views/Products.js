@@ -24,11 +24,16 @@ const Search = (props) => {
         </div>
     )
 }
-const Recomendations = () => {
+const Recomendations = (props) => {
+
     return (
         <div className="recomendations">
             <h3>Recomendações do Paçoca</h3>
             <div className="card">
+                <div className="onclickOverlay"
+                    data-redirecturl={`${props.url}/1`}
+                    onClick={props.setRedirect()}
+                ></div>
                 <img src="/images/pacoca.png" alt="foto de uma paçoca" />
                 <div className="cardText">
                     <h3>Paçoquita</h3>
@@ -37,6 +42,10 @@ const Recomendations = () => {
                 </div>
             </div>
             <div className="card">
+                <div className="onclickOverlay"
+                    data-redirecturl={`${props.url}/2`}
+                    onClick={props.setRedirect()}
+                ></div>
                 <img src="/images/balachita.png" alt="foto de um pacote de bala chita" />
                 <div className="cardText">
                     <h3>Balas Chita</h3>
@@ -144,14 +153,14 @@ class Products extends Component {
         if (this.state.redirect) {
             //retorna a classe Redirect, 
             //e redireciona para o valor do estado redirect 
-            return <Redirect to={this.state.redirect} />
+            return <Redirect to={this.state.redirect} from={this.props.match.url} />
         }
         return (
             <div className="App">
                 <Header />
                 <section className="products center">
                     <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-                    <Recomendations />
+                    <Recomendations setRedirect={() => (this.handleRedirect)} url={baseUrl} />
                     {this.state.products.length === 0 ?
                         (<p>Carregando</p>)
                         :
